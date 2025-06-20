@@ -15,6 +15,7 @@ namespace Game.Core.Scripts
         public Action OnBoostCanceled;
         public Action<Vector2> OnPitchYaw;
         public Action<float> OnRoll;
+        public Action OnShoot;
 
         private void Awake()
         {
@@ -30,6 +31,7 @@ namespace Game.Core.Scripts
             _inputController.SpaceShip.Boost.canceled += Boost_canceled;
             _inputController.SpaceShip.PitchYaw.performed += PitchYaw_performed;
             _inputController.SpaceShip.Roll.performed += Roll_performed;
+            _inputController.SpaceShip.Shoot.performed += Shoot_performed;
         }
 
         private void OnDisable()
@@ -40,6 +42,7 @@ namespace Game.Core.Scripts
             _inputController.SpaceShip.Boost.canceled -= Boost_canceled;
             _inputController.SpaceShip.PitchYaw.performed -= PitchYaw_performed;
             _inputController.SpaceShip.Roll.performed -= Roll_performed;
+            _inputController.SpaceShip.Shoot.performed -= Shoot_performed;
             _inputController.Disable();
         }
         
@@ -71,6 +74,10 @@ namespace Game.Core.Scripts
         private void Roll_performed(InputAction.CallbackContext obj)
         {
             OnRoll?.Invoke(obj.ReadValue<float>());
+        }
+        private void Shoot_performed(InputAction.CallbackContext obj) 
+        {
+            OnShoot?.Invoke();
         }
     }
 }

@@ -56,9 +56,9 @@ public class SpaceShipMoverment : MonoBehaviour
         //Roll
         rb.AddRelativeTorque(Vector3.back * roll1D * rollTorque * Time.deltaTime);
         //Pitch
-        //rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.deltaTime);
         //Yaw
-        //rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.deltaTime);
         //Thrust
         if (thrust1D > 0.1f || thrust1D < -0.1f)
         {

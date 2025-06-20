@@ -49,7 +49,7 @@ namespace Game.Core.Scripts
         {
             if (!Mathf.Approximately(0, pitchAmount))
             {
-                _rb.AddRelativeTorque(transform.right * spaceShipStat.pitchForce * pitchAmount * Time.fixedDeltaTime);
+                _rb.AddRelativeTorque(transform.right * spaceShipStat.pitchForce * pitchAmount * Time.fixedDeltaTime * -1);
             }
 
             if (!Mathf.Approximately(0, yawAmount))
@@ -109,8 +109,8 @@ namespace Game.Core.Scripts
 
         private void OnShipPitchYaw(Vector2 value)
         {
-            pitchAmount = Mathf.Clamp(value.x, -1f, 1f);
-            yawAmount = Mathf.Clamp(value.y, -1f, 1f);
+            pitchAmount = value.y;//Mathf.Clamp(value.x, -1f, 1f);
+            yawAmount = value.x; //Mathf.Clamp(value.y, -1f, 1f);
         }
 
         private void OnShipRoll(float value)

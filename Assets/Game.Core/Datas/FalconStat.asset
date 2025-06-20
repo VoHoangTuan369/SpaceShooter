@@ -16,7 +16,7 @@ MonoBehaviour:
   decelerationRate: 100
   thrustForce: 1000
   brakeForce: 1000
-  pitchForce: 1000
-  yawForce: 1000
+  pitchForce: 2000
+  yawForce: 2000
   rollForce: 1000
   boostForceMultiplier: 250

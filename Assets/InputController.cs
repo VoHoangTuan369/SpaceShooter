@@ -135,6 +135,15 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""96becb54-b969-4695-9b08-2c1bf714cbff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3aee5eb-72a4-4c59-a779-65c8e8f22fa4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         m_SpaceShip_Boost = m_SpaceShip.FindAction("Boost", throwIfNotFound: true);
         m_SpaceShip_PitchYaw = m_SpaceShip.FindAction("PitchYaw", throwIfNotFound: true);
         m_SpaceShip_Roll = m_SpaceShip.FindAction("Roll", throwIfNotFound: true);
+        m_SpaceShip_Shoot = m_SpaceShip.FindAction("Shoot", throwIfNotFound: true);
     }
 
     ~@InputController()
@@ -356,6 +377,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
     private readonly InputAction m_SpaceShip_Boost;
     private readonly InputAction m_SpaceShip_PitchYaw;
     private readonly InputAction m_SpaceShip_Roll;
+    private readonly InputAction m_SpaceShip_Shoot;
     /// <summary>
     /// Provides access to input actions defined in input action map "SpaceShip".
     /// </summary>
@@ -387,6 +409,10 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "SpaceShip/Roll".
         /// </summary>
         public InputAction @Roll => m_Wrapper.m_SpaceShip_Roll;
+        /// <summary>
+        /// Provides access to the underlying input action "SpaceShip/Shoot".
+        /// </summary>
+        public InputAction @Shoot => m_Wrapper.m_SpaceShip_Shoot;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -428,6 +454,9 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         /// <summary>
@@ -454,6 +483,9 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         /// <summary>
@@ -529,5 +561,12 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRoll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shoot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
