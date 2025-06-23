@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,55 +7,50 @@ namespace Game.Core.Scripts
 {
     public class Shooting : MonoBehaviour
     {
-        [SerializeField] GameObject bulletPrefab;
         [SerializeField] float bulletSpeed;
+        [SerializeField] int bulletAmount;
         [SerializeField] Transform shootingPoint;
         [SerializeField] ShipController shipController;
-        [SerializeField] int bulletAmount;
-        private List<GameObject> bulletPool = new List<GameObject>();
-        //bool shooting = false;
+        int currBulletAmount;
+
         private void Start()
         {
-            CreateBulletPool();
+            BulletPool.Instance.InitializePool(bulletAmount);
+            currBulletAmount = bulletAmount;
             shipController.OnShoot += HandleShooting;
         }
+
         private void OnDisable()
         {
             shipController.OnShoot -= HandleShooting;
         }
-        //private void FixedUpdate()
-        //{
-        //    HandleShooting();
-        //}
+
         void HandleShooting()
         {
-            foreach (GameObject bullet in bulletPool)
+            if (currBulletAmount == 0)
             {
-                if (!bullet.activeSelf)
-                {                     
-                    Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.linearVelocity = shootingPoint.forward * bulletSpeed;
-                    }
-                    bullet.SetActive(true);
-                }
+                StartCoroutine(ReloadBullet());
+                return;
+            }
+            GameObject bullet = BulletPool.Instance.GetBullet();
+            if (bullet == null) return;
+
+            bullet.transform.position = shootingPoint.position;
+            bullet.transform.rotation = shootingPoint.rotation;
+            bullet.SetActive(true);
+            currBulletAmount--;
+
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = shootingPoint.forward * bulletSpeed;
             }
         }
-        void CreateBulletPool() 
+        IEnumerator ReloadBullet() 
         {
-            for (int i = 0; i < bulletAmount; i++) 
-            {
-                GameObject newBullet = Instantiate(bulletPrefab);
-                bulletPool.Add(newBullet);
-                newBullet.SetActive(false);
-            }
+            yield return new WaitForSeconds(2f);
+            BulletPool.Instance.ReturnBullet();
+            currBulletAmount = bulletAmount;
         }
-        //#region Input Methods
-        //public void OnShoot(InputAction.CallbackContext context)
-        //{
-        //    shooting = context.performed;
-        //}
-        //#endregion
     }
 }

@@ -610,6 +610,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1337510165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1337510167}
+  - component: {fileID: 1337510166}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1337510166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337510165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a50cc1b80be4c428eea2bc6263dcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroyOnLoad: 1
+  bulletPrefab: {fileID: 8424926462877161188, guid: 40732c1ccc8223843ade047fb00e4d09, type: 3}
+--- !u!4 &1337510167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337510165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365886866
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,11 +765,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb97d07dab56ed74bb2b0a267ee8ab17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8424926462877161188, guid: 40732c1ccc8223843ade047fb00e4d09, type: 3}
   bulletSpeed: 100
+  bulletAmount: 20
   shootingPoint: {fileID: 1599423792}
   shipController: {fileID: 1365886869}
-  bulletAmount: 10
 --- !u!1 &1599423791
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,3 +972,4 @@ SceneRoots:
   - {fileID: 218499462}
   - {fileID: 1365886867}
   - {fileID: 1248200745}
+  - {fileID: 1337510167}
